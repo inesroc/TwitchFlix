@@ -35,5 +35,4 @@ public class Categories extends AppCompatActivity {
         }
         startActivity(intent);
     }
-
 }

@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         setupSharedPreferences();
     }
 
@@ -39,24 +38,19 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public void StreamLiveContent(View view){
-
         if (permissionAlreadyGranted()) {
              Intent intent = new Intent(MainActivity.this, StreamLiveContent.class);
              startActivity(intent);
         }
-
         requestPermission();
     }
 
-    //////////////////////////////////////////////////////////////////
-    ////////////////////////////// MENU //////////////////////////////
-    //////////////////////////////////////////////////////////////////
+    // Menu
 
     private void setupSharedPreferences() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,14 +73,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
-     /*   if (key.equals("display_text")) {
-            Toast.makeText(this, "Display", Toast.LENGTH_SHORT).show();
-            //setTextVisible(sharedPreferences.getBoolean("display_text",true));
-        }
-        else{*/
            changeLanguague();
-       // }
     }
 
     @Override
@@ -98,39 +85,27 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public void changeLanguague(){
         String lang = sharedPreferences.getString("language","en");
-           /* if(lang == "Portuguese")
+        if (lang != null) {
+            if(lang.equals(getResources().getString(R.string.pt)))
                 lang = "pt";
             else
-                lang = "en";*/
-        if(lang.equals(getResources().getString(R.string.pt)))
-            lang = "pt";
-        else
-            lang = "en";
-       // Toast.makeText(this, "Display22 "+lang, Toast.LENGTH_SHORT).show();
-        //  changeLanguague(lang);
-        LocaleHelper.setLocale(MainActivity.this, lang);
-        finish();
-        startActivity(getIntent());
+                lang = "en";
+            LocaleHelper.setLocale(MainActivity.this, lang);
+            finish();
+            startActivity(getIntent());
+        }
 
     }
 
-
-    //////////////////////////////////////////////////////////////////
-    /////////////////////////// PERMISSION ///////////////////////////
-    //////////////////////////////////////////////////////////////////
-
+    // Permissions
 
     private boolean permissionAlreadyGranted() {
-
         int camera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         int audio = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
-
         return camera == PackageManager.PERMISSION_GRANTED && audio == PackageManager.PERMISSION_GRANTED;
-
     }
 
     private void requestPermission() {
-
         int camera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         int audio = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
 
@@ -138,29 +113,27 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         int AUDIO_CODE = 2;
         if(camera != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_CODE);
-        else if(audio != PackageManager.PERMISSION_GRANTED)
+        if(audio != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, AUDIO_CODE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
         switch (requestCode){
             case 1:{
                 if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Permission is denied!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.permission_denied, Toast.LENGTH_SHORT).show();
                 }
                 break;
             }
             case 2:{
                 if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Permission is denied!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.permission_denied, Toast.LENGTH_SHORT).show();
                 }
                 break;
             }
 
         }
     }
-
 }

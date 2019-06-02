@@ -6,6 +6,8 @@ import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -38,7 +40,6 @@ public class StreamLiveContent extends AppCompatActivity implements RtmpHandler.
     private Button btnPause;
 
     private SharedPreferences sp;
-    //private String rtmpUrl = "rtmp://ossrs.net/" + getRandomAlphaString(3) + '/' + getRandomAlphaDigitString(5);
     private String rtmpUrl = "rtmp://34.90.22.224:1935/live/";
     private String recPath = Environment.getExternalStorageDirectory().getPath() + "/test.mp4";
 
@@ -57,16 +58,16 @@ public class StreamLiveContent extends AppCompatActivity implements RtmpHandler.
         rtmpUrl = sp.getString("rtmpUrl", rtmpUrl);
 
         // initialize url.
-        final EditText efu = (EditText) findViewById(R.id.url);
+        final EditText efu = findViewById(R.id.url);
         efu.setText(rtmpUrl);
 
-        btnPublish = (Button) findViewById(R.id.publish);
-        btnSwitchCamera = (Button) findViewById(R.id.swCam);
-        btnRecord = (Button) findViewById(R.id.record);
-        btnSwitchEncoder = (Button) findViewById(R.id.swEnc);
-        btnPause = (Button) findViewById(R.id.pause);
+        btnPublish = findViewById(R.id.publish);
+        btnSwitchCamera = findViewById(R.id.swCam);
+        btnRecord = findViewById(R.id.record);
+        btnSwitchEncoder = findViewById(R.id.swEnc);
+        btnPause = findViewById(R.id.pause);
         btnPause.setEnabled(false);
-        mCameraView = (SrsCameraView) findViewById(R.id.glsurfaceview_camera);
+        mCameraView = findViewById(R.id.glsurfaceview_camera);
 
         mPublisher = new SrsPublisher(mCameraView);
         mPublisher.setEncodeHandler(new SrsEncodeHandler(this));
@@ -80,89 +81,69 @@ public class StreamLiveContent extends AppCompatActivity implements RtmpHandler.
         mCameraView.setCameraCallbacksHandler(new SrsCameraView.CameraCallbacksHandler(){
             @Override
             public void onCameraParameters(Camera.Parameters params) {
-                //params.setFocusMode("custom-focus");
-                //params.setWhiteBalance("custom-balance");
-                //etc...
             }
         });
 
-        btnPublish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (btnPublish.getText().toString().contentEquals("publish")) {
-                    rtmpUrl = efu.getText().toString();
-                    SharedPreferences.Editor editor = sp.edit();
-                    editor.putString("rtmpUrl", rtmpUrl);
-                    editor.apply();
+        btnPublish.setOnClickListener(v -> {
+            if (btnPublish.getText().toString().contentEquals(getResources().getString(R.string.publish))) {
+                rtmpUrl = efu.getText().toString();
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("rtmpUrl", rtmpUrl);
+                editor.apply();
 
-                    mPublisher.startPublish(rtmpUrl);
-                    mPublisher.startCamera();
+                mPublisher.startPublish(rtmpUrl);
+                mPublisher.startCamera();
 
-                    if (btnSwitchEncoder.getText().toString().contentEquals("soft encoder")) {
-                        Toast.makeText(getApplicationContext(), "Use hard encoder", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Use soft encoder", Toast.LENGTH_SHORT).show();
-                    }
-                    btnPublish.setText("stop");
-                    btnSwitchEncoder.setEnabled(false);
-                    btnPause.setEnabled(true);
-                } else if (btnPublish.getText().toString().contentEquals("stop")) {
-                    mPublisher.stopPublish();
-                    mPublisher.stopRecord();
-                    btnPublish.setText("publish");
-                    btnRecord.setText("record");
-                    btnSwitchEncoder.setEnabled(true);
-                    btnPause.setEnabled(false);
+                if (btnSwitchEncoder.getText().toString().contentEquals(getResources().getString(R.string.soft_encoder))) {
+                    Toast.makeText(getApplicationContext(), "Use hard encoder", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Use soft encoder", Toast.LENGTH_SHORT).show();
                 }
+                btnPublish.setText(R.string.stop);
+                btnSwitchEncoder.setEnabled(false);
+                btnPause.setEnabled(true);
+            } else if (btnPublish.getText().toString().contentEquals(getResources().getString(R.string.stop))) {
+                mPublisher.stopPublish();
+                mPublisher.stopRecord();
+                btnPublish.setText(R.string.publish);
+                btnRecord.setText(R.string.record);
+                btnSwitchEncoder.setEnabled(true);
+                btnPause.setEnabled(false);
             }
         });
-        btnPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(btnPause.getText().toString().equals("Pause")){
-                    mPublisher.pausePublish();
-                    btnPause.setText("resume");
-                }else{
-                    mPublisher.resumePublish();
-                    btnPause.setText("Pause");
-                }
-            }
-        });
-
-        btnSwitchCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPublisher.switchCameraFace((mPublisher.getCameraId() + 1) % Camera.getNumberOfCameras());
-            }
-        });
-
-        btnRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (btnRecord.getText().toString().contentEquals("record")) {
-                    if (mPublisher.startRecord(recPath)) {
-                        btnRecord.setText("pause");
-                    }
-                } else if (btnRecord.getText().toString().contentEquals("pause")) {
-                    mPublisher.pauseRecord();
-                    btnRecord.setText("resume");
-                } else if (btnRecord.getText().toString().contentEquals("resume")) {
-                    mPublisher.resumeRecord();
-                    btnRecord.setText("pause");
-                }
+        btnPause.setOnClickListener(view -> {
+            if(btnPause.getText().toString().equals(getResources().getString(R.string.pause))){
+                mPublisher.pausePublish();
+                btnPause.setText(R.string.resume);
+            }else{
+                mPublisher.resumePublish();
+                btnPause.setText(R.string.pause);
             }
         });
 
-        btnSwitchEncoder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (btnSwitchEncoder.getText().toString().contentEquals("soft encoder")) {
-                    mPublisher.switchToSoftEncoder();
-                    btnSwitchEncoder.setText("hard encoder");
-                } else if (btnSwitchEncoder.getText().toString().contentEquals("hard encoder")) {
-                    mPublisher.switchToHardEncoder();
-                    btnSwitchEncoder.setText("soft encoder");
+        btnSwitchCamera.setOnClickListener(v -> mPublisher.switchCameraFace((mPublisher.getCameraId() + 1) % Camera.getNumberOfCameras()));
+
+        btnRecord.setOnClickListener(v -> {
+            if (btnRecord.getText().toString().contentEquals(getResources().getString(R.string.record))) {
+                if (mPublisher.startRecord(recPath)) {
+                    btnRecord.setText(R.string.pause);
                 }
+            } else if (btnRecord.getText().toString().contentEquals(getResources().getString(R.string.pause))) {
+                mPublisher.pauseRecord();
+                btnRecord.setText(R.string.resume);
+            } else if (btnRecord.getText().toString().contentEquals(getResources().getString(R.string.resume))) {
+                mPublisher.resumeRecord();
+                btnRecord.setText(R.string.pause);
+            }
+        });
+
+        btnSwitchEncoder.setOnClickListener(v -> {
+            if (btnSwitchEncoder.getText().toString().contentEquals(getResources().getString(R.string.soft_encoder))) {
+                mPublisher.switchToSoftEncoder();
+                btnSwitchEncoder.setText(R.string.hard_encoder);
+            } else if (btnSwitchEncoder.getText().toString().contentEquals(getResources().getString(R.string.hard_encoder))) {
+                mPublisher.switchToHardEncoder();
+                btnSwitchEncoder.setText(R.string.soft_encoder);
             }
         });
     }
@@ -251,7 +232,7 @@ public class StreamLiveContent extends AppCompatActivity implements RtmpHandler.
     @Override
     protected void onResume() {
         super.onResume();
-        final Button btn = (Button) findViewById(R.id.publish);
+        final Button btn = findViewById(R.id.publish);
         btn.setEnabled(true);
         mPublisher.resumeRecord();
     }
@@ -270,38 +251,16 @@ public class StreamLiveContent extends AppCompatActivity implements RtmpHandler.
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mPublisher.stopEncode();
         mPublisher.stopRecord();
-        btnRecord.setText("record");
+        btnRecord.setText(R.string.record);
         mPublisher.setScreenOrientation(newConfig.orientation);
-        if (btnPublish.getText().toString().contentEquals("stop")) {
+        if (btnPublish.getText().toString().contentEquals(getResources().getString(R.string.stop))) {
             mPublisher.startEncode();
         }
         mPublisher.startCamera();
-    }
-
-    private static String getRandomAlphaString(int length) {
-        String base = "abcdefghijklmnopqrstuvwxyz";
-        Random random = new Random();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            int number = random.nextInt(base.length());
-            sb.append(base.charAt(number));
-        }
-        return sb.toString();
-    }
-
-    private static String getRandomAlphaDigitString(int length) {
-        String base = "abcdefghijklmnopqrstuvwxyz0123456789";
-        Random random = new Random();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            int number = random.nextInt(base.length());
-            sb.append(base.charAt(number));
-        }
-        return sb.toString();
     }
 
     private void handleException(Exception e) {
@@ -309,8 +268,8 @@ public class StreamLiveContent extends AppCompatActivity implements RtmpHandler.
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             mPublisher.stopPublish();
             mPublisher.stopRecord();
-            btnPublish.setText("publish");
-            btnRecord.setText("record");
+            btnPublish.setText(R.string.publish);
+            btnRecord.setText(R.string.record);
             btnSwitchEncoder.setEnabled(true);
         } catch (Exception e1) {
             //

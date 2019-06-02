@@ -16,4 +16,15 @@
     <string name="anim">Animation</string>
     <string name="action_settings">Settings</string>
     <string name="langInfo">Select a Language</string>
+    <string name="retry">Retry</string>
+    <string name="stream_name">Stream Name</string>
+    <string name="pause">Pause</string>
+    <string name="publish">Start</string>
+    <string name="record">Record</string>
+    <string name="switch_camera">Switch</string>
+    <string name="soft_encoder">Soft Encoder</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="hard_encoder">Hard Encoder</string>
+    <string name="resume">Resume</string>
+    <string name="stop">Stop</string>
 </resources>

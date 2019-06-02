@@ -11,15 +11,15 @@ class MovieObject {
         url = text3;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
-    public String getInfo() {
+    String getInfo() {
         return info;
     }
 
-    public String getUrl(){
+    String getUrl(){
         return url;
     }
 }

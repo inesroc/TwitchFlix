@@ -24,16 +24,7 @@ public class LocaleHelper {
         return setLocale(context, lang);
     }
 
-    public static Context onAttach(Context context, String defaultLanguage) {
-        String lang = getPersistedData(context, defaultLanguage);
-        return setLocale(context, lang);
-    }
-
-    public static String getLanguage(Context context) {
-        return getPersistedData(context, Locale.getDefault().getLanguage());
-    }
-
-    public static Context setLocale(Context context, String language) {
+    static Context setLocale(Context context, String language) {
         persist(context, language);
 
      //   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

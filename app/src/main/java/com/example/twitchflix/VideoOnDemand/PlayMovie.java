@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.net.Uri;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +19,8 @@ import com.example.twitchflix.R;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.Wave;
 
+import java.util.Objects;
+
 public class PlayMovie extends AppCompatActivity {
 
     ProgressBar progressBar;
@@ -25,9 +29,8 @@ public class PlayMovie extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
-        getSupportActionBar().hide(); // hide the title bar
+        Objects.requireNonNull(getSupportActionBar()).hide(); // hide the title bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
 
@@ -44,7 +47,7 @@ public class PlayMovie extends AppCompatActivity {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
 
@@ -52,13 +55,9 @@ public class PlayMovie extends AppCompatActivity {
         final VideoView vidView = findViewById(R.id.myVideo);
         Uri vidUri = Uri.parse(vidAddress);
         vidView.setVideoURI(vidUri);
-        vidView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                progressBar.setVisibility(View.GONE);
-                vidView.start();
-            }
+        vidView.setOnPreparedListener(mp -> {
+            progressBar.setVisibility(View.GONE);
+            vidView.start();
         });
 
         MediaController vidControl = new MediaController(this);

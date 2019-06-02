@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.twitchflix">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="io.antmedia.android.liveVideoPlayer.LiveVideoPlayerActivity"></activity>
+        <activity android:name="io.antmedia.android.liveVideoPlayer.LiveVideoPlayerActivity"
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity">
@@ -24,7 +24,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".LiveBroadcaster.StreamLiveContent" />
+
+        <activity android:name=".LiveBroadcaster.StreamLiveContent"
+            android:configChanges="orientation|screenSize"/>
         <activity android:name=".VideoStreaming" />
         <activity android:name=".VideoOnDemand.SelectMovies" />
         <activity

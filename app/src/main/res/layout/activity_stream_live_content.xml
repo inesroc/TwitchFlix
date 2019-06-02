@@ -18,7 +18,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pause"
+        android:text="@string/pause"
         android:id="@+id/pause"
         android:layout_above="@+id/publish"
         android:layout_alignParentLeft="true"
@@ -26,7 +26,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="publish"
+        android:text="@string/publish"
         android:id="@+id/publish"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -35,7 +35,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="switch"
+        android:text="@string/switch_camera"
         android:id="@+id/swCam"
         android:layout_alignBottom="@+id/publish"
         android:layout_toRightOf="@+id/publish" />
@@ -43,7 +43,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="record"
+        android:text="@string/record"
         android:id="@+id/record"
         android:layout_alignBottom="@+id/publish"
         android:layout_toRightOf="@id/swCam" />
@@ -51,7 +51,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="soft encoder"
+        android:text="@string/soft_encoder"
         android:id="@+id/swEnc"
         android:layout_alignBottom="@+id/publish"
         android:layout_toRightOf="@id/record"
@@ -61,7 +61,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:id="@+id/url"
         android:textColor="@color/accent_material_light" />
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.twitchflix.VideoOnDemand;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.DataObjectHolder> {
 
-    private static String LOG_TAG = "MyRecyclerViewAdapter";
     private ArrayList<MovieObject> mDataset;
     private static MyClickListener myClickListener;
 
@@ -22,10 +22,11 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.DataObjectHold
         TextView dateTime;
         String url;
 
-        public DataObjectHolder(View itemView) {
+        DataObjectHolder(View itemView) {
             super(itemView);
             label = itemView.findViewById(R.id.textView);
             dateTime = itemView.findViewById(R.id.textView2);
+            String LOG_TAG = "MyRecyclerViewAdapter";
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -36,24 +37,24 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.DataObjectHold
         }
     }
 
-    public void setOnItemClickListener(MyClickListener myClickListener) {
-        this.myClickListener = myClickListener;
+    void setOnItemClickListener(MyClickListener myClickListener) {
+        ViewAdapter.myClickListener = myClickListener;
     }
 
-    public ViewAdapter(ArrayList<MovieObject> myDataset) {
+    ViewAdapter(ArrayList<MovieObject> myDataset) {
         mDataset = myDataset;
     }
 
+    @NonNull
     @Override
-    public DataObjectHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DataObjectHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_row, parent, false);
 
-        DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
-        return dataObjectHolder;
+        return new DataObjectHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(DataObjectHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DataObjectHolder holder, int position) {
         holder.label.setText(mDataset.get(position).getTitle());
         holder.dateTime.setText(mDataset.get(position).getInfo());
         holder.url = mDataset.get(position).getUrl();

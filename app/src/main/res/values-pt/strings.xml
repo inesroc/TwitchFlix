@@ -16,4 +16,15 @@
     <string name="action_settings">Definições</string>
     <string name="videoLive">Transmissão ao Vivo</string>
     <string name="langInfo">Escolha uma Linguaguem</string>
+    <string name="retry">Tente outra Vez</string>
+    <string name="stream_name">Nome da Transmissão</string>
+    <string name="pause">Pausa</string>
+    <string name="publish">Começar</string>
+    <string name="record">Gravar</string>
+    <string name="switch_camera">Virar</string>
+    <string name="soft_encoder">Soft Encoder</string>
+    <string name="permission_denied">Permissão Negada</string>
+    <string name="hard_encoder">Hard Encoder</string>
+    <string name="resume">Play</string>
+    <string name="stop">Parar</string>
 </resources>
