@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         int AUDIO_CODE = 2;
         if(camera != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_CODE);
-        else if(audio != PackageManager.PERMISSION_GRANTED)
+        if(audio != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, AUDIO_CODE);
     }
 
