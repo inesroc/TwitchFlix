@@ -1,0 +1,35 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" translatable="false">TwitchFlix</string>
+    <string name="video">Video Streaming</string>
+    <string name="stream">Stream Live Content</string>
+    <string name="vod">Video On Demand</string>
+    <string name="videoLive">Live Streaming</string>
+    <string name="anim">Animation</string>
+    <string name="com">Comedy</string>
+    <string name="horror">Horror</string>
+    <string name="lego">Lego</string>
+    <string name="sciFi">Sci-Fi</string>
+    <string name="year">Year</string>
+    <string name="duration">Duration</string>
+    <string name="display_text" translatable="false">Display</string>
+    <string name="action_settings">Settings</string>
+    <string name="lang">Language</string>
+    <string name="en">English</string>
+    <string name="pt">Portuguese</string>
+    <string name="langInfo">Select a Language</string>
+
+    <string name="error_querying_decoders" translatable="false">Unable to query device decoders</string>
+    <string name="error_no_decoder" translatable="false">This device does not provide a decoder for <xliff:g id="mime_type">%1$s</xliff:g></string>
+
+    <string name="error_no_secure_decoder" translatable="false">This device does not provide a secure decoder for <xliff:g id="mime_type">%1$s</xliff:g></string>
+
+    <string name="error_instantiating_decoder" translatable="false">Unable to instantiate decoder <xliff:g id="decoder_name">%1$s</xliff:g></string>
+
+    <string name="error_unsupported_video" translatable="false">Media includes video tracks, but none are playable by this device</string>
+
+    <string name="error_unsupported_audio" translatable="false">Media includes audio tracks, but none are playable by this device</string>
+
+    <string name="storage_permission_denied" translatable="false">Permission to access storage was denied</string>
+
+    <string name="retry" translatable="false">Retry</string>
+</resources>

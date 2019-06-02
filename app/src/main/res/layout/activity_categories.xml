@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VideoOnDemand.Categories"
+    android:background="@color/colorBackground">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/animation"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dip"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_button"
+                android:onClick="onClick"
+                android:text="@string/anim"
+                android:textSize="17sp"
+                android:textColor="@color/colorBackground"
+                tools:ignore="NestedWeights" />
+
+            <Button
+                android:id="@+id/comedy"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dip"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_button"
+                android:onClick="onClick"
+                android:text="@string/com"
+                android:textSize="17sp"
+                android:textColor="@color/colorBackground"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/horror"
+                android:layout_width="0dip"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:background="@drawable/border_button"
+                android:text="@string/horror"
+                android:textSize="17sp"
+                android:textColor="@color/colorBackground"
+                tools:ignore="NestedWeights" />
+
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/lego"
+                android:layout_width="0dip"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:background="@drawable/border_button"
+                android:text="@string/lego"
+                android:textSize="17sp"
+                android:textColor="@color/colorBackground"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/scifi"
+                android:layout_width="0dip"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:background="@drawable/border_button"
+                android:textSize="17sp"
+                android:textColor="@color/colorBackground"
+                android:text="@string/sciFi"
+                tools:ignore="NestedWeights" />
+
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dip"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

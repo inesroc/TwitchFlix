@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="year">year</string>
+    <string name="video">Video Streaming</string>
+    <string name="vod">Video On Demand</string>
+    <string name="stream">Stream Live Content</string>
+    <string name="sciFi">Sci-Fi</string>
+    <string name="pt">Portuguese</string>
+    <string name="videoLive">Live Streaming</string>
+    <string name="lego">Lego</string>
+    <string name="horror">Horror</string>
+    <string name="en">English</string>
+    <string name="lang">Language</string>
+    <string name="duration">Duration</string>
+    <string name="com">Comedy</string>
+    <string name="anim">Animation</string>
+    <string name="action_settings">Settings</string>
+    <string name="langInfo">Select a Language</string>
+</resources>
