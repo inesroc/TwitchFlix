@@ -1,8 +1,9 @@
 # Report: Twitchflix
 
-# Mobile Device Programing (2019)
+### Rodrigo Marques (up201605427), Inês Rocha - (up201606266)
+#### Mobile Device Programing, Faculdade de Ciências (2019)
 
-## Rodrigo Marques - 201605427, Inês Rocha - 201606266
+
 ## 1 Introduction
 
 This project was developed for the Mobile Devices Pro gramming class. The objective was to create a platform for both watching Video-on-Demand and livestreams from other users of the app. The frontend was developed as an android application. It is divided in two activities, watching videos and
